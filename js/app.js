@@ -30,6 +30,11 @@ function getInput(){
 
 function newGame() {
     answer = ranNum();
+    $('ul#guessList').children().remove();
+    count = 0;
+    $('#count').text(count);
+    $('#feedback').text('Make your Guess!');
+    $('#userGuess').val('');
 }
 
 function guessButton() {
@@ -52,15 +57,13 @@ $(document).ready(function(){
   		$(".overlay").fadeOut(1000);
   	});
 
-    $('#newGame').click(function () {
-        newGame();
-    });
+    $('#newGame').click(newGame);
+
+    newGame();
 
     $('#guessButton').click(guessButton);
-
-    $('form').keypress(function(e) {
-        if (e.keyCode == 13) {
-            guessButton();
-        }
-    })
+    $('form').submit(function(e) {
+        e.preventDefault();
+        guessButton();
+    });
 });
