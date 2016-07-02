@@ -3,8 +3,7 @@ var count = 0;
 var lastGuess = null;
 
 function ranNum(){
-    var genNum = Math.floor((Math.random() * 100) + 1);
-    return genNum;
+    return Math.floor((Math.random() * 100) + 1);
 }
 
 function feedBack(correctAnswer, guess, previousGuess){
@@ -35,7 +34,11 @@ function feedBack(correctAnswer, guess, previousGuess){
 
 function getInput(){
     var userGuess = $('#userGuess').val();
-    return parseInt(userGuess);
+    if (userGuess % 1 == 0) {
+        return parseInt(userGuess);
+    } else {
+        return null;
+    }
 }
 
 function newGame() {
@@ -49,14 +52,14 @@ function newGame() {
 
 function guessButton() {
     var guess = getInput();
-    if (!isNaN(guess)) {
+    if (!isNaN(guess) && guess != null) {
         feedBack(answer, guess, lastGuess);
         count++;
         $('#count').text(count);
         $('ul#guessList').append("<li>" + guess + "</li>");
         lastGuess = guess;
     } else {
-        alert("Please enter a number Between 1 and 100!")
+        alert("Please enter a whole number Between 1 and 100!")
     }
 }
 
