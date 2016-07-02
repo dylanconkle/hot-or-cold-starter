@@ -1,25 +1,35 @@
 var answer = 0;
 var count = 0;
+var lastGuess = null;
 
 function ranNum(){
     var genNum = Math.floor((Math.random() * 100) + 1);
     return genNum;
 }
 
-function feedBack(correctAnswer, guess){
+function feedBack(correctAnswer, guess, previousGuess){
     var distance = Math.abs(correctAnswer - guess);
-    if (distance >= 50){
-        $('#feedback').text("Very Cold");
-    } else if (distance > 20 && distance < 50){
-        $('#feedback').text("Cold");
-    } else if (distance > 10 && distance <= 20){
-        $('#feedback').text("Hot");
-    }else if (distance != 0){
-        $('#feedback').text("Very Hot");
-    } else {
-        $('#feedback').text("Yay, You Win!");
-    }
 
+    if (distance == 0){
+        $('#feedback').text("Yay, you win");
+    } else if (previousGuess == null) {
+       if (distance >= 50) {
+           $('#feedback').text("Very Cold");
+       } else if (distance > 20 && distance < 50) {
+           $('#feedback').text("Cold");
+       } else if (distance > 10 && distance <= 20) {
+           $('#feedback').text("Hot");
+       } else if (distance != 0) {
+           $('#feedback').text("Very Hot");
+       }
+   } else {
+       var previousDistance = Math.abs(correctAnswer - previousGuess);
+       if (previousDistance > distance){
+           $('#feedback').text("Warmer");
+       } else if (distance > previousDistance){
+           $('#feedback').text("Colder");
+       }
+   }
     return (distance == 0);
 }
 
@@ -39,10 +49,11 @@ function newGame() {
 
 function guessButton() {
     var guess = getInput();
-    feedBack(answer, guess);
+    feedBack(answer, guess, lastGuess);
     count++;
     $('#count').text(count);
     $('ul#guessList').append("<li>" + guess + "</li>");
+    lastGuess = guess;
 }
 
 $(document).ready(function(){
