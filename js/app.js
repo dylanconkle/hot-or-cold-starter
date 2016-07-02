@@ -49,11 +49,15 @@ function newGame() {
 
 function guessButton() {
     var guess = getInput();
-    feedBack(answer, guess, lastGuess);
-    count++;
-    $('#count').text(count);
-    $('ul#guessList').append("<li>" + guess + "</li>");
-    lastGuess = guess;
+    if (!isNaN(guess)) {
+        feedBack(answer, guess, lastGuess);
+        count++;
+        $('#count').text(count);
+        $('ul#guessList').append("<li>" + guess + "</li>");
+        lastGuess = guess;
+    } else {
+        alert("Please enter a number Between 1 and 100!")
+    }
 }
 
 $(document).ready(function(){
