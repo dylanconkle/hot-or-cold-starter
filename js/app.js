@@ -43,6 +43,7 @@ function getInput(){
 
 function newGame() {
     answer = ranNum();
+    lastGuess = null;
     $('ul#guessList').children().remove();
     count = 0;
     $('#count').text(count);
