@@ -1,6 +1,7 @@
 var answer = 0;
 var count = 0;
 var lastGuess = null;
+var guesses = [];
 
 function ranNum(){
     return Math.floor((Math.random() * 100) + 1);
@@ -44,6 +45,7 @@ function getInput(){
 function newGame() {
     answer = ranNum();
     lastGuess = null;
+    guesses = [];
     $('ul#guessList').children().remove();
     count = 0;
     $('#count').text(count);
@@ -53,10 +55,14 @@ function newGame() {
 
 function guessButton() {
     var guess = getInput();
-    if (!isNaN(guess) && guess != null && guess <=100) {
+    var existing = $.inArray(guess, guesses);
+    if (existing != -1) {
+       alert("Duplicate number!")
+    } else if (!isNaN(guess) && guess != null && guess <=100 && existing == -1 ) {
         feedBack(answer, guess, lastGuess);
         count++;
         $('#count').text(count);
+        guesses.push(guess)
         $('ul#guessList').append("<li>" + guess + "</li>");
         lastGuess = guess;
     } else {
