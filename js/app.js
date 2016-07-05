@@ -58,6 +58,7 @@ function guessButton() {
     var existing = $.inArray(guess, guesses);
     if (existing != -1) {
        alert("Duplicate number!")
+       $('#userGuess').val('');
     } else if (!isNaN(guess) && guess != null && guess <=100 && existing == -1 ) {
         feedBack(answer, guess, lastGuess);
         count++;
@@ -68,6 +69,7 @@ function guessButton() {
         lastGuess = guess;
     } else {
         alert("Please enter a whole number Between 1 and 100!")
+        $('#userGuess').val('');
     }
 }
 
