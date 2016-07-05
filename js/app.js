@@ -64,6 +64,7 @@ function guessButton() {
         $('#count').text(count);
         guesses.push(guess)
         $('ul#guessList').append("<li>" + guess + "</li>");
+        $('#userGuess').val('');
         lastGuess = guess;
     } else {
         alert("Please enter a whole number Between 1 and 100!")
