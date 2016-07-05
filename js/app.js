@@ -53,7 +53,7 @@ function newGame() {
 
 function guessButton() {
     var guess = getInput();
-    if (!isNaN(guess) && guess != null) {
+    if (!isNaN(guess) && guess != null && guess <=100) {
         feedBack(answer, guess, lastGuess);
         count++;
         $('#count').text(count);
@@ -65,7 +65,7 @@ function guessButton() {
 }
 
 $(document).ready(function(){
-	
+
 	/*--- Display information modal box ---*/
   	$(".what").click(function(){
     	$(".overlay").fadeIn(1000);
